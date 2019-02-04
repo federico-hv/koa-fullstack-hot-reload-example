@@ -2,18 +2,27 @@ import express from 'express'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import App from '../common/App'
+import Koa from 'koa';
+import getRouter from 'koa-router';
 
-const app = express()
+const app = new Koa();
 
-app.get('/api/message', (req, res) => {
-    res.send({
-      message: 'ESTA ES OTRA WEA'
-    })
+const router = getRouter();
+
+router.prefix('/api');
+
+router.get('/message', (ctx, next) => {
+    ctx.body = {
+        message: 'FULL HOT RELOAD WORKING WITH REACT AND KOA'
+    };
 })
 
-app.get('*', (req,res) => {
+app.use(router.routes()).use(router.allowedMethods());
+
+app.use(ctx => {
     let application = renderToString(<App />)
-    let html = `<!doctype html>
+
+    ctx.body = `<!doctype html>
     <html class="no-js" lang="">
         <head>
             <meta charset="utf-8">
@@ -27,9 +36,7 @@ app.get('*', (req,res) => {
             <div id="root">${application}</div>
             <script src="http://localhost:3001/client.js"></script>
         </body>
-		</html>`
-		
-	res.send(html)
-})
+    </html>`;
+});
 
 export default app

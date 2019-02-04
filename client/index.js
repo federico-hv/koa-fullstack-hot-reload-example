@@ -14,10 +14,10 @@ render(
 if (module.hot) {
     module.hot.accept('../common/App', () => {
         render(
-					<AppContainer>
-						<App />
-					</AppContainer>, 
-					document.getElementById('root')
-				)
+			<AppContainer>
+				<App />
+			</AppContainer>, 
+			document.getElementById('root')
+		)
     })
 }

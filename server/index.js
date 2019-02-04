@@ -1,16 +1,19 @@
-import http from 'http'
-import app from './server'
+import http from 'http';
+import app from './server';
 
-const server = http.createServer(app)
+const port = 3000;
 
-let currentApp = app
+let currentApp = app.callback();
+const server = http.createServer(currentApp);
 
-server.listen(3000)
+server.listen(port);
 
 if (module.hot) {
- module.hot.accept('./server', () => {
-  server.removeListener('request', currentApp)
-  server.on('request', app)
-  currentApp = app
- })
+    module.hot.accept('./server', () => {
+        server.removeListener('request', currentApp);
+        currentApp = app.callback();
+        server.on('request', currentApp);
+    });
 }
+
+console.log(`Server running on: http://localhost: ${port}`);
