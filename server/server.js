@@ -3,21 +3,11 @@ import React from 'react'
 import { renderToString } from 'react-dom/server'
 import App from '../common/App'
 import Koa from 'koa';
-import getRouter from 'koa-router';
+import applyRoutes from './routes';
 
 const app = new Koa();
 
-const router = getRouter();
-
-router.prefix('/api');
-
-router.get('/message', (ctx, next) => {
-    ctx.body = {
-        message: 'FULL HOT RELOAD WORKING WITH REACT AND KOA'
-    };
-})
-
-app.use(router.routes()).use(router.allowedMethods());
+applyRoutes(app);
 
 app.use(ctx => {
     let application = renderToString(<App />)
