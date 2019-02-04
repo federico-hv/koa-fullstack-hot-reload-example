@@ -5,9 +5,9 @@ import App from '../common/App'
 
 const app = express()
 
-app.get('/api', (req, res) => {
+app.get('/api/message', (req, res) => {
     res.send({
-      message: 'I am a server route and can also be hot reloaded!'
+      message: 'ESTA ES OTRA WEA'
     })
 })
 
@@ -25,6 +25,7 @@ app.get('*', (req,res) => {
         </head>
         <body>
             <div id="root">${application}</div>
+            <script src="http://localhost:3001/client.js"></script>
         </body>
 		</html>`
 		
