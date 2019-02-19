@@ -6,7 +6,8 @@ router.prefix('/api');
 
 router.get('/message', (ctx, next) => {
     ctx.body = {
-        message: 'HOT RELOADED MESSAGE'
+        message: 'THIS COMES FROM THE SERVER',
+        // message: 'THIS IS A HOT RELOADED MESSAGE'
     };
 })
 

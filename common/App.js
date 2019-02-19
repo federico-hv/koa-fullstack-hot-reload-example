@@ -26,8 +26,8 @@ class App extends Component {
 
 	render(){
 		return (
-			<div style={{ background: 'purple' }}>
-				<div>This is the message: <span style={{color: 'white'}}>{this.state.message}</span></div>
+			<div style={{ background: 'purple', color: 'white', fontSize: '30px' }}>
+				<div>Message from the server: {this.state.message}</div>
 				<br/>
 				<button onClick={this.getMessage}>Get Message</button>
 			</div>
