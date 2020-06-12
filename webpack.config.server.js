@@ -20,13 +20,14 @@ module.exports = {
         ],
     },
     plugins: [
+        new webpack.NormalModuleReplacementPlugin(/\.(css|less)$/, './empty.js'),
         new StartServerPlugin("server.js"),
         new webpack.NamedModulesPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
         new webpack.DefinePlugin({
             "process.env": { BUILD_TARGET: JSON.stringify("server") },
-        }),
+        })
     ],
     output: {
         path: path.join(__dirname, ".build"),
